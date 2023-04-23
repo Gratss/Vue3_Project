@@ -4,21 +4,27 @@ export default {
     return {
       orders: [
         {
-          id: "0",
+          id: "123",
           name: "Юрий",
-          phone: "+7(978)888-88-87",
-          adId: "1",
+          phone: "+7(978)000-00-11",
+          adId: "0",
           done: true,
         },
         {
-          id: "1",
+          id: "0",
           name: "Дмитрий",
-          phone: "+7(978)777-11-22",
-          adId: "2",
+          phone: "+7(978)299-20-11",
+          adId: "1",
           done: false,
         },
       ],
     };
+  },
+  methods: {
+    markDone(order) {
+      order.done = !order.done;
+      console.log(order.done);
+    },
   },
 };
 </script>
@@ -35,6 +41,7 @@ export default {
                 <v-checkbox
                   :input-value="order.done"
                   color="primary"
+                  @click="markDone(order)"
                 ></v-checkbox>
               </v-list-item-action>
             </template>
@@ -42,7 +49,7 @@ export default {
             <v-list-item-subtitle>{{ order.phone }}</v-list-item-subtitle>
             <template v-slot:append>
               <v-list-item-action>
-                <v-btn class="primary" :to="'/ad/' + order.adId">Открыть</v-btn>
+                <v-btn :to="'/ad/' + order.adId" class="primary">Открыть</v-btn>
               </v-list-item-action>
             </template>
           </v-list-item>
