@@ -14,8 +14,19 @@ export default {
         (v) =>
           (v && v.length >= 6) ||
           "Пароль должен содержать больше или равняться 6 символам",
-      ],
+          ],
     };
+  },
+  methods: {
+    onSubmit() {
+      if (this.$refs.form.validate()) {
+        const user = {
+          email: this.email,
+          password: this.password,
+        };
+        console.log(user);
+      }
+    },
   },
 };
 </script>
@@ -50,7 +61,9 @@ export default {
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary">Войти</v-btn>
+            <v-btn color="primary" @click="onSubmit" :disabled="!valid"
+              >Login</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-col>
