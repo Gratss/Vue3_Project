@@ -4,15 +4,15 @@ export default {
     return {
       drawer: false,
       links: [
-        { title: "Login", icon: "mdi-lock", url: "/login" },
-        { title: "Registration", icon: "mdi-face", url: "/registration" },
+        { title: "Войти", icon: "mdi-lock", url: "/login" },
+        { title: "Зарегистрироваться", icon: "mdi-face", url: "/registration" },
         {
-          title: "Orders",
+          title: "Заказы",
           icon: "mdi-bookmark-multiple-outline",
           url: "/orders",
         },
-        { title: "New ad", icon: "mdi-note-plus-outline", url: "/new" },
-        { title: "My ads", icon: "mdi-view-list-outline", url: "/list" },
+        { title: "Новинки", icon: "mdi-note-plus-outline", url: "/new" },
+        { title: "Корзина", icon: "mdi-view-list-outline", url: "/list" },
       ],
     };
   },
