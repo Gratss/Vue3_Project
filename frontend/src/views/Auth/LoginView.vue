@@ -4,6 +4,17 @@ export default {
     return {
       email: "",
       password: "",
+      valid: false,
+      emailRules: [
+        (v) => !!v || "Введите электронную почту",
+        (v) => /.+@.+\..+/.test(v) || "Адрес электронной почты недействителен",
+      ],
+      passwordRules: [
+        (v) => !!v || "Введите пароль",
+        (v) =>
+          (v && v.length >= 6) ||
+          "Пароль должен содержать больше или равняться 6 символам",
+      ],
     };
   },
 };
@@ -16,12 +27,14 @@ export default {
         <v-card class="elevetion-12">
           <v-toolbar dark color="primary" class="pl-4"> Войти </v-toolbar>
           <v-card-text>
-            <v-form>
+            <v-form v-model="valid" ref="form" validation>
               <v-text-field
                 prepend-icon="mdi-account"
                 name="email"
                 label="Электронная почта"
                 type="email"
+                v-model="email"
+                :rules="emailRules"
               >
               </v-text-field>
               <v-text-field
@@ -29,6 +42,8 @@ export default {
                 name="password"
                 label="Пароль"
                 type="password"
+                v-model="password"
+                :rules="passwordRules"
               >
               </v-text-field>
             </v-form>
