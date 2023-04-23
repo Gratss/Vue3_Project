@@ -1,8 +1,14 @@
-import { createStore } from "vuex";
-import ads from "./ads";
+import { createStore } from 'vuex'
+import ads from './ads'
+import user from './user'
+
 
 const store = createStore({
-  modules: { ads },
-});
+modules:{
+ads,
+user
+}
+})
 
-export default store;
+
+export default store
