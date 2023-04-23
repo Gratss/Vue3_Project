@@ -7,7 +7,7 @@ export default {
         { title: "Войти", icon: "mdi-lock", url: "/login" },
         { title: "Зарегистрироваться", icon: "mdi-face", url: "/registration" },
         {
-          title: "Заказы",
+          title: "Пользователи",
           icon: "mdi-bookmark-multiple-outline",
           url: "/orders",
         },
