@@ -62,7 +62,7 @@ export default {
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="onSubmit" :disabled="!valid"
-              >Login</v-btn
+              >Войти</v-btn
             >
           </v-card-actions>
         </v-card>
