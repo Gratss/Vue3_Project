@@ -41,16 +41,21 @@ export default {
   mutations: {},
   actions: {},
   getters: {
-    ads(state) {
-      return state.ads;
-    },
-    promoAds(state) {
-      return state.ads.filter((ad) => {
-        return ad.promo;
-      });
-    },
-    myAds(state) {
-      return state.ads;
-    },
+      ads(state) {
+          return state.ads
+      },
+      promoAds(state) {
+          return state.ads.filter(ad => {
+              return ad.promo
+          })
+      },
+      myAds(state) {
+          return state.ads
   },
-};
+adById(state) {
+return id => {
+return state.ads.find(ad => ad.id == id)
+}
+}
+  }
+}
