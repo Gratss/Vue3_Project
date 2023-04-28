@@ -28,8 +28,11 @@
   </v-card-title>
   <v-card-actions>
   <v-spacer></v-spacer>
-  <v-btn color="black" text :to="'/ad/' +  ad.id"  > Открыть </v-btn>
-  <v-btn raised color="primary"> Купить </v-btn>
+  <v-btn text :to="'/ad/' + ad.id">
+						Открыть
+					</v-btn>
+  <v-btn raised color="primary"> Открыть </v-btn>
+  <buy-ad-modal></buy-ad-modal>
   </v-card-actions>
   </v-card>
   </v-col>

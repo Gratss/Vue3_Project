@@ -9,7 +9,7 @@ class User {
 export default {
 	
 	state: {
-     user: null
+     user: "1gleb@gmail.com,qwqwqw" 
 },
 mutations: {
 	setUser(state,payload) {

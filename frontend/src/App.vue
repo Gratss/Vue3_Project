@@ -40,7 +40,7 @@ v-if="isUserLoggedIn"
   <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
   <v-toolbar-title>
     <v-btn to="/">
-  НА ГЛАВНУЮ
+  На главную
   </v-btn>
   </v-toolbar-title>
   
