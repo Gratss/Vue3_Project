@@ -43,15 +43,16 @@
     <v-col cols="12">
     <v-card-actions>
     <v-spacer></v-spacer>
-    <v-btn>Закрыть</v-btn>
-    <v-btn color="success">Купить это!</v-btn>
-    </v-card-actions>
-    </v-col>
-    </v-row>
-    </v-card>
-    </v-dialog>
+    <v-btn @click="onClose" :disabled="localLoading">Закрыть</v-btn>
+        <v-btn @click="onSave" color="success" :disabled="localLoading" :loading="localLoading"
+>Купить это!</v-btn>
+        </v-card-actions>
+        </v-col>
+        </v-row>
+        </v-card>
+        </v-dialog>
 </template>
-
+    
 <script>
 export default {
     props: ['ad'],
@@ -67,9 +68,11 @@ export default {
         this.name = ""
         this.phone = ""
         this.modal = false
+        localLoading: false
         },
         onSave (){
             if (this.name !== '' && this.phone !== '') {
+                this.localLoading = true
                 this.$store.dispatch('createOrder', {
                                 name: this.name,
                                 phone: this.phone,
@@ -77,6 +80,7 @@ export default {
                                 userId: this.ad.userId
                             })
                             .finally(() => {
+                                this.localLoading = false
                                 this.name = ""
                                 this.phone = ""
                                 this.modal = false
@@ -87,3 +91,4 @@ export default {
 }
 }
 </script>
+    
