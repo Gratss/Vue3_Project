@@ -1,59 +1,85 @@
 <template>
-    <v-dialog v-model="modal" width="400px">
-        <template v-slot:activator="{ props }">
-            <v-btn v-bind="props" color="warning">
-                Изменить</v-btn></template>
-        <v-card class="pa-3">
-            <v-row justify="center">
-                <v-col cols="12">
-                    <v-card-title>
-                        <h1 class="text--primary">Изменить</h1>
-                    </v-card-title>
-                </v-col>
-            </v-row>
+    <v-dialog
+    v-model="modal"
+    width="400px">
+    <template v-slot:activator="{ props }">
+    <v-btn
+    v-bind="props"
+    color="warning">
+    Изменить</v-btn></template>
+    <v-card class="pa-3">
+    <v-row justify="center">
+    <v-col cols="12">
+    <v-card-title>
+    <h1 class="text--primary">Изменить</h1>
+    </v-card-title>
+    </v-col>
+    </v-row>
+    
+    <v-row justify="center">
+    <v-col cols="12">
+    <v-card-text>
+        <v-card-text>
+        <v-text-field
+        name="title"
+        label="Название"
+        type="text"
+        v-model="editedTitle"
+        >
+        </v-text-field>
+        <v-textarea
+        name="desc"
+        label="Описание"
+        type="text"
+        v-model="editedDesc"
+        class="mb-3"
+        ></v-textarea>
+        </v-card-text>
 
-            <v-row justify="center">
-                <v-col cols="12">
-                    <v-card-text>
-                        <v-text-field
-                            name="title"
-                            label="Название"
-                            type="text"
-                            v-model="editedTitle"
-                        >
-                        </v-text-field>
-                        <v-textarea
-                            name="desc"
-                            label="Описание"
-                            type="text"
-                            v-model="editedDesc"
-                            class="mb-3"
-                        ></v-textarea>
-                    </v-card-text>
-                </v-col>
-            </v-row>
+    </v-card-text>
+    </v-col>
+    </v-row>
+    
+    <v-row justify="center">
+    <v-col cols="12">
+    <v-card-actions>
+    <v-spacer></v-spacer>
+    <v-btn @click="onCancel">Отменить</v-btn>
+    <v-btn color="success" @click="onSave">Сохранить</v-btn>
+    </v-card-actions>
 
-            <v-row justify="center">
-                <v-col cols="12">
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn>Отменить</v-btn>
-                        <v-btn color="success">Сохранить</v-btn>
-                    </v-card-actions>
-                </v-col>
-            </v-row>
-        </v-card>
+    </v-col>
+    </v-row>
+    </v-card>
     </v-dialog>
 </template>
-
+    
 <script>
-export default {
+    export default {
+    props: ['ad'],
     data() {
-        return {
-            modal: false,
-            editedTitle: "",
-            editedDesc: ""
-        }
+    return {
+    modal: false,
+    editedTitle: this.ad.title,
+	editedDesc: this.ad.desc
     }
-}
+    },
+    methods: {
+	onCancel (){
+	this.editedTitle = this.ad.title
+	this.editedDesc = this.ad.desc
+	this.modal = false
+	},
+	onSave (){
+	if (this.editedTitle !== '' && this.editedDesc !== '') {
+	this.$store.dispatch('updateAd', {
+			title: this.editedTitle,
+			desc: this.editedDesc,
+			id: this.ad.id
+		})
+	this.modal = false
+	}
+	}
+},
+    }
 </script>
