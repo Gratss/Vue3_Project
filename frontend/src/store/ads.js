@@ -7,6 +7,7 @@ export default {
             promo: true,
             src: "https://cdn1.ozone.ru/s3/multimedia-r/6342773775.jpg",
             id: "1",
+            userId: "1"
           },
           {
             title: "Кофе Jardin",
