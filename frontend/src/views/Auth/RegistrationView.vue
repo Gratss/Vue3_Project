@@ -36,7 +36,7 @@
 			</v-card-text>
 			<v-card-actions>
 			<v-spacer></v-spacer>
-			<v-btn color="primary" @click="onSubmit" :disabled="!valid">
+			<v-btn color="primary" @click="onSubmit" :loading="loading"	:disabled="!valid || loading">
                 Создать аккаунт
 			</v-btn>
 			</v-card-actions>
@@ -61,20 +61,26 @@ confirmPasswordRules: [v => !!v || 'Password is required',v => v === this.passwo
         }
     },
     computed: {
-        loading() {
-            return this.$store.getters.loading
-        }
-    },
-    methods: {
-        onSubmit() {
-            if (this.$refs.form.validate()) {
-                const user = {
-                    email: this.email,
-                    password: this.password
-                }
-                this.$store.dispatch('registerUser', user)
-            }
-        }
-    }
-} 
+	loading() {
+		return this.$store.getters.loading
+	}
+},
+methods:{
+	onSubmit(){
+	if (this.$refs.form.validate()){
+		const user = {
+			email: this.email,
+			password: this.password
+		}
+		this.$store.dispatch('registerUser', user)
+		.then(() => {
+		this.$router.push("/")
+	})
+	.catch((err) => {
+		console.log(err.message)
+	})
+			}
+		},
+	},
+};
 </script>
