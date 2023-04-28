@@ -70,38 +70,42 @@ variant="text"
 </v-snackbar>
   </v-app>
   </template>
-  
-  
-  
-  <script>
-  export default {
-  data() {
-  return {
-  drawer: false,
-  links: [
-  {title:"Войти", icon:"mdi-lock", url:"/login"},
-  {title:"Зарегистрироваться",icon:"mdi-face",url:"/registration"},
-  {title:"Пользователи",icon:"mdi-bookmark-multiple-outline", url:"/orders"},
-  {title:"Новинки", icon:"mdi-note-plus-outline", url:"/new"},
-  {title:"Корзина", icon:"mdi-view-list-outline", url:"/list"}
-  ]
-  }
-  
-  },
-  computed: {
-    error () {
-      return this.$store.getters.error
+   <script>
+   export default {
+   data() {
+   return {
+   drawer: false,
    }
-},
-methods: {
-    closeError () {
-      this.$store.dispatch('clearError')
-    }
+   
+   },
+   computed: {
+     error () {
+       return this.$store.getters.error
+    },
+    isUserLoggedIn () {
+       return this.$store.getters.isUserLoggedIn
+ },
+ links(){
+ if (this.isUserLoggedIn) {
+ return [
+ {title:"Пользователи",icon:"mdi-bookmark-multiple-outline", url:"/orders"},
+ {title:"Новинки", icon:"mdi-note-plus-outline", url:"/new"},
+ {title:"Корзина", icon:"mdi-view-list-outline", url:"/list"}
+ ]
+ } else {
+ return [
+ {title:"Войти", icon:"mdi-lock", url:"/login"},
+ {title:"Зарегистрироваться",icon:"mdi-face",url:"/registration"},
+ ]
  }
-
+ }
+ },
+ methods: {
+     closeError () {
+       this.$store.dispatch('clearError')
+     }
   }
-  </script>
-<style scoped>
-</style>
-
-  
+   }
+   </script>
+ <style scoped>
+ </style>
