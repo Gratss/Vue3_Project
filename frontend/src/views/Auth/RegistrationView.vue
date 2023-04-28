@@ -66,21 +66,22 @@ confirmPasswordRules: [v => !!v || 'Password is required',v => v === this.passwo
 	}
 },
 methods:{
-	onSubmit(){
+onSubmit(){
 	if (this.$refs.form.validate()){
-		const user = {
-			email: this.email,
-			password: this.password
-		}
-		this.$store.dispatch('registerUser', user)
-		.then(() => {
+	const user = {
+		email: this.email,
+		password: this.password
+	}
+	this.$store.dispatch('registerUser', user)
+	.then(() => {
 		this.$router.push("/")
 	})
 	.catch((err) => {
 		console.log(err.message)
 	})
-			}
-		},
-	},
+}
+	}
+}
 };
 </script>
+    
