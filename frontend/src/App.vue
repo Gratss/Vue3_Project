@@ -23,6 +23,16 @@ v-for="link in links"
 </template>
 <v-list-item-title>{{ link.title }}</v-list-item-title>
 </v-list-item>
+<v-list-item
+@click="onLogout"
+v-if="isUserLoggedIn"
+>
+<template v-slot:prepend>
+<v-icon icon="mdi-exit-to-app"></v-icon>
+</template>
+<v-list-item-title>Выйти</v-list-item-title>
+</v-list-item>
+
 
   </v-list>
   </v-navigation-drawer>
@@ -33,6 +43,7 @@ v-for="link in links"
   НА ГЛАВНУЮ
   </v-btn>
   </v-toolbar-title>
+  
   <v-spacer></v-spacer>
   <v-toolbar-items class="hidden-sm-and-down">
     <v-btn
@@ -46,9 +57,34 @@ start
 ></v-icon>
 {{ link.title }}
 </v-btn>
-
+<v-btn @click="onLogout"
+v-if="isUserLoggedIn">
+<v-icon
+start
+icon="mdi-exit-to-app"
+></v-icon>
+Выйти
+</v-btn>
   </v-toolbar-items>
+  
   </v-app-bar>
+  <v-toolbar-items class="hidden-sm-and-down">
+<v-btn
+
+v-for="link in links"
+:key="link.title"
+:to="link.url"
+>
+<v-icon
+start
+:icon="link.icon"
+></v-icon>
+{{ link.title }}
+</v-btn>
+
+</v-toolbar-items>
+
+  
   <v-main>
 <router-view></router-view>
 </v-main>
@@ -70,42 +106,55 @@ variant="text"
 </v-snackbar>
   </v-app>
   </template>
-   <script>
-   export default {
-   data() {
-   return {
-   drawer: false,
-   }
-   
-   },
-   computed: {
-     error () {
-       return this.$store.getters.error
-    },
-    isUserLoggedIn () {
-       return this.$store.getters.isUserLoggedIn
- },
- links(){
- if (this.isUserLoggedIn) {
- return [
- {title:"Пользователи",icon:"mdi-bookmark-multiple-outline", url:"/orders"},
- {title:"Новинки", icon:"mdi-note-plus-outline", url:"/new"},
- {title:"Корзина", icon:"mdi-view-list-outline", url:"/list"}
- ]
- } else {
- return [
- {title:"Войти", icon:"mdi-lock", url:"/login"},
- {title:"Зарегистрироваться",icon:"mdi-face",url:"/registration"},
- ]
- }
- }
- },
- methods: {
-     closeError () {
-       this.$store.dispatch('clearError')
-     }
+  
+  
+  
+  <script>
+  export default {
+  data() {
+  return {
+  drawer: false,
   }
-   }
-   </script>
- <style scoped>
- </style>
+  
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+   },
+   isUserLoggedIn () {
+      return this.$store.getters.isUserLoggedIn
+},
+links(){
+if (this.isUserLoggedIn) {
+return [
+{title:"Пользователи",icon:"mdi-bookmark-multiple-outline", url:"/orders"},
+{title:"Новинки", icon:"mdi-note-plus-outline", url:"/new"},
+{title:"Корзина", icon:"mdi-view-list-outline", url:"/list"}
+]
+} else {
+return [
+{title:"Войти", icon:"mdi-lock", url:"/login"},
+{title:"Зарегистрироваться",icon:"mdi-face",url:"/registration"},
+]
+}
+}
+
+
+},
+methods: {
+    closeError () {
+      this.$store.dispatch('clearError')
+    },
+    onLogout () {
+this.$store.dispatch('logoutUser')
+this.$router.push("/")
+}
+
+ }
+
+  }
+  </script>
+<style scoped>
+</style>
+
+  
