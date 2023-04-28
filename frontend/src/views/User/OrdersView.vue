@@ -44,8 +44,13 @@ return this.$store.getters.myAds
 }
 
 },
+computed: {
+orders(){
+return this.$store.getters.orders
+
+}
+}
 
   }
-  
 </script>
   
