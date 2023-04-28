@@ -58,19 +58,23 @@ emailRules: [(v) => !!v || "E-mail is required",(v) => /.+@.+\..+/.test(v) || "�
 passwordRules: [(v) => !!v || "Name is required",(v) =>(v && v.length >= 6) ||"Пароль должен состять не менее, чем из 6 символов",],
 confirmPasswordRules: [v => !!v || 'Password is required',v => v === this.password || 'Пароль должен совпадать']
 
-};
-},
-methods: {
-    onSubmit(){
-      if (this.$refs.form.validate()) {
-        const user = {
-          email: this.email,
-          password: this.password
         }
-        this.$store.dispatch('registerUser', user)
-      }
+    },
+    computed: {
+        loading() {
+            return this.$store.getters.loading
+        }
+    },
+    methods: {
+        onSubmit() {
+            if (this.$refs.form.validate()) {
+                const user = {
+                    email: this.email,
+                    password: this.password
+                }
+                this.$store.dispatch('registerUser', user)
+            }
+        }
     }
-  }
 } 
 </script>
-    
