@@ -29,8 +29,11 @@
 			</v-card-text>
 			<v-card-actions>
 			<v-spacer></v-spacer>
-			<v-btn color="primary" @click="onSubmit" :disabled="!valid">
-			Войти
+			<v-btn color="primary"
+      @click="onSubmit"
+:loading="loading"
+:disabled="!valid || loading">
+	Войти>
 			</v-btn>
 			</v-card-actions>
 			</v-card>
@@ -49,6 +52,11 @@ valid: false,
 emailRules: [(v) => !!v || "E-mail is required",(v) => /.+@.+\..+/.test(v) || "Введите электронную почту",],
 passwordRules: [(v) => !!v || "Name is required",(v) =>(v && v.length >= 6) ||"Пароль должен состоять не меньше, чем из 6 символов",],
 };
+},
+computed: {
+	loading() {
+		return this.$store.getters.loading
+	}
 },
 methods:{
 	onSubmit(){
