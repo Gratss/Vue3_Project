@@ -63,6 +63,12 @@ export default {
                     src: "https://fb.ru/misc/i/gallery/47201/3002819.jpg"
                 };
                 this.$store.dispatch("createAd", ad)
+                .then(() => {
+                    this.$router.push("/list")
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
             }
         },
     },
