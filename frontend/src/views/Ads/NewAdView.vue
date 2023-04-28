@@ -24,42 +24,52 @@
                   </v-col>
               </v-row>
               <v-row>
-                  <v-col cols="8">
-                      <v-switch v-model="promo" label="Ad to Promo?"></v-switch>
-                  </v-col>
-              </v-row>
-              <v-row>
-                  <v-col cols="8">
-                      <v-spacer></v-spacer>
-                      <v-btn color="success" @click="createAd">Добавить</v-btn>
-                  </v-col>
-              </v-row>
-          </v-col>
-      </v-row>
-  </v-container>
+                    <v-col cols="8">
+                        <v-switch v-model="promo" label="Ad to Promo?"></v-switch>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col cols="8">
+                        <v-spacer></v-spacer>
+                        <v-btn
+    color="success"
+    @click="createAd"
+    :loading="loading"
+    :disabled:="!valid || loading"
+    >Создать</v-btn>
+                    </v-col>
+                </v-row>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 <script>
 export default {
-  data() {
-      return {
-          valid: false,
-          title: "",
-          description: "",
-          promo: false,
-      };
-  },
-  methods: {
-      createAd() {
-          if (this.$refs.form.validate()) {
-              const ad = {
-                  title: this.title,
-                  desc: this.description,
-                  promo: this.promo,
-                  src: "https://fb.ru/misc/i/gallery/47201/3002819.jpg"
-              };
-              console.log(ad);
-          }
-      },
-  },
+    data() {
+        return {
+            valid: false,
+            title: "",
+            description: "",
+            promo: false,
+        };
+    },
+    methods: {
+        createAd() {
+            if (this.$refs.form.validate()) {
+                const ad = {
+                    title: this.title,
+                    desc: this.description,
+                    promo: this.promo,
+                    src: "https://fb.ru/misc/i/gallery/47201/3002819.jpg"
+                };
+                this.$store.dispatch("createAd", ad)
+            }
+        },
+    },
+    computed: {
+        loading() {
+            return this.$store.getters.loading
+        }
+    },
 };
 </script>
