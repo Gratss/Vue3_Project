@@ -54,14 +54,36 @@
 
 <script>
 export default {
-props: ['ad'],
-data() {
-    return {
-    modal: false,
-    name: '',
-    phone: ''
-
-    }
+    props: ['ad'],
+    data() {
+        return {
+        modal: false,
+        name: '',
+        phone: ''
+        }
+    },
+    methods: {
+        onClose (){
+        this.name = ""
+        this.phone = ""
+        this.modal = false
+        },
+        onSave (){
+            if (this.name !== '' && this.phone !== '') {
+                this.$store.dispatch('createOrder', {
+                                name: this.name,
+                                phone: this.phone,
+                                adId: this.ad.id,
+                                userId: this.ad.userId
+                            })
+                            .finally(() => {
+                                this.name = ""
+                                this.phone = ""
+                                this.modal = false
+                            })
+                            
+                }
+            },
 }
 }
 </script>
